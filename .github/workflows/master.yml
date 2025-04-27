@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - master
+    - local-master
 
 jobs:
   main:
@@ -49,10 +49,10 @@ jobs:
       run: npx grunt copy:ghPages
 
     - name: Deploy to GitHub Pages
-      if: success() && github.ref == 'refs/heads/master'
+      if: success() && github.ref == 'refs/heads/local-master'
       uses: crazy-max/ghaction-github-pages@v3
       with:
-        target_branch: gh-pages
+        target_branch: local-gh-pages
         build_dir: ./build/prod
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
